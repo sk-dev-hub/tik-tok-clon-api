@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UsersCollection;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class GlobalController extends Controller
 {
 
-    public function getRandomUsers()
+    public function getRandomUsers(): JsonResponse
     {
         try {
             

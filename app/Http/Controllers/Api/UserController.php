@@ -11,9 +11,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function loggedInUser(): JsonResponse
     {
         try {
@@ -31,9 +29,6 @@ class UserController extends Controller
 
 
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function updateUserImage(Request $request): JsonResponse
     {
         $request->validate(['image' => 'required|mimes:png,jpg,jpeg']);
@@ -57,9 +52,7 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function getUser(string $id): JsonResponse
     {
         try {
@@ -96,7 +89,7 @@ class UserController extends Controller
 
             $user->save();
 
-            return response()->json(['success' => 'OK']);
+            return response()->json(['success' => 'OK'], 200);
 
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);

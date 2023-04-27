@@ -36,6 +36,19 @@ class FileService {
         return $model;
     }
 
+    public function addVideo($model, $request)
+    {
+        $video = $request->file('videio');
 
+        $extension = $video->getClientOriginalExtension();
+
+        $name = time() . '.' . $extension;
+
+        $video->move(public_path() . '/files/' . $name);
+
+        $model->video = '/files/' . $name;
+
+        return $model;
+    }
 
 }
