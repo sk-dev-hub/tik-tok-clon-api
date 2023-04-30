@@ -22,7 +22,7 @@ class CommentController extends Controller
             $comment = New Comment;
 
             $comment->post_id = $request->input('post_id');
-            $comment->text = $request->input('text');
+            $comment->text = $request->input('comment');
             $comment->user_id = auth()->user()->id;
 
             $comment->save();

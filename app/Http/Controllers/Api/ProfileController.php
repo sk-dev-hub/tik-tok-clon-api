@@ -14,17 +14,15 @@ class ProfileController extends Controller
 {
    
 
-    public function show(string $id): JsonResponse
+    public function show(string $id): array
     {
         try {
             
-            $posts = Post::query()
-                    ->where('user_id', $id)
+            $posts = Post::where('user_id', $id)
                     ->orderBy('created_at', 'desc')
                     ->get();
 
-            $user = User::query()
-                    ->where('id', $id)
+            $user = User::where('id', $id)
                     ->get();
 
             return [

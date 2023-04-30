@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Image;
 
 class FileService {
@@ -30,25 +31,37 @@ class FileService {
         );
 
         $name = time() . '.'  . $extension;
-        $image->save(public_path() . '/files/' . $name);
-        $model->image = '/files/' . $name;
+
+        $filePath = '/images/' . $name;
+
+
+
+        $image->save(public_path('storage') . $filePath);
+       
+        $model->image = '/storage' . $filePath;
 
         return $model;
     }
 
     public function addVideo($model, $request)
     {
-        $video = $request->file('videio');
+        $video = $request->file('video');
+
 
         $extension = $video->getClientOriginalExtension();
 
         $name = time() . '.' . $extension;
 
-        $video->move(public_path() . '/files/' . $name);
+        $filePath = '/videos/' . $name;
 
-        $model->video = '/files/' . $name;
+        $isFileUploaded = Storage::disk('public')->put($filePath, file_get_contents($video));
+        
+       // $video->move(public_path() . '/files/' . $name);
+
+        $model->video = '/storage' . $filePath;
 
         return $model;
     }
+
 
 }
